@@ -1,9 +1,27 @@
 Repository of Version Control for FPGA/SDK projects
 ######################################################
-Jan.43, 2019   Jack Lee
+Jan.13, 2019   Jack Lee
 
 
 Version control of FPGA with Block Design
+============================================
+* Steps like ``Without Block Design``
+* export block design by select ``File/Export/Export Block Design...`` to create design.tcl ;
+* Comments "# Set 'sources_1' fileset object"
+* Add following lines at the end of project tcl:
+
+::
+
+  # Create block design, JL
+  source $origin_dir/design_1.tcl
+
+  # Generate the wrapper
+  set design_name [get_bd_designs]
+  make_wrapper -files [get_files $design_name.bd] -top -import
+
+  
+
+Version control of FPGA without Block Design
 ============================================
 * Select ``File/Write Project tcl...`` to output tcl file for creating whole project, includes block design;
 
