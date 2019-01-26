@@ -24,10 +24,21 @@ set_property "board_part" "" $obj
 set_property "simulator_language" "VHDL" $obj
 set_property "target_language" "VHDL" $obj
 
-add_files -norecurse $hdlRoot/ledTimeCtrl.vhd
+##### Create 'sources_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sources_1] ""]} {
+  create_fileset -srcset sources_1
+}
 
-add_files -norecurse $xdcRoot/topLedTimeCtl.xdc
-add_files -norecurse $xdcRoot/board.xdc
+add_files -fileset sources_1 -norecurse $hdlRoot/ledTimeCtrl.vhd
+
+##### Create 'constrs_1' fileset (if not found)
+if {[string equal [get_filesets -quiet constrs_1] ""]} {
+  create_fileset -constrset constrs_1
+}
+
+##### add constraints file into constrs_1
+add_files -fileset constrs_1 -norecurse $xdcRoot/topLedTimeCtl.xdc
+add_files -fileset constrs_1 -norecurse $xdcRoot/board.xdc
 
 # If successful, "touch" a file so the make utility will know it's done 
-touch {.setupGolden.done}
+touch {.setupLedCtrl.done}

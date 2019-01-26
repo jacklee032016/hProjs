@@ -26,8 +26,14 @@ set_property "target_language" "VHDL" $obj
 
 add_files -norecurse $hdlRoot/goldenMainCtrl.vhd
 
-add_files -norecurse $xdcRoot/topGolden.xdc
-add_files -norecurse $xdcRoot/board.xdc
+##### Create 'constrs_1' fileset (if not found)
+if {[string equal [get_filesets -quiet constrs_1] ""]} {
+  create_fileset -constrset constrs_1
+}
+
+##### add constraints file into constrs_1
+add_files -fileset constrs_1 -norecurse $xdcRoot/topGolden.xdc
+add_files -fileset constrs_1 -norecurse $xdcRoot/board.xdc
 
 # If successful, "touch" a file so the make utility will know it's done 
 touch {.setupGolden.done}

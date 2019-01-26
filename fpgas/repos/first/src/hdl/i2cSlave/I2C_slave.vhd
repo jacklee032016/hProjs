@@ -14,7 +14,7 @@ use ieee.numeric_std.all;
 ------------------------------------------------------------
 entity I2C_slave is
   generic (
-    SLAVE_ADDR : std_logic_vector(7 downto 0)) := 4;
+    SLAVE_ADDR : std_logic_vector(7 downto 0));
   port (
     reset			: in    std_logic;	-- add to syncronize with rtk reset
 
