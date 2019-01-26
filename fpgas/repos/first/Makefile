@@ -13,7 +13,19 @@ endif
 
 
 # These are all the compilation targets, starting with "all"
-all: golden ledCtrl update
+all: golden ledCtrl update picoUart
+
+##### Project PicoBlaze + UART
+picoUart:setupPicoUart compilePicoUart
+
+setupPicoUart: .setupPicoUart.done
+
+.setupPicoUart.done:
+	vivado -mode batch -source ./scripts/picoUartSetup.tcl -tempDir works -log picoUartSetup.log -jou picoUartSetup.jou
+
+compilePicoUart : .compilePicoUart.done
+.compilePicoUart.done : 
+	cmd /c "vivado -mode batch -source ./scripts/picoUartCompile.tcl -tempDir works -log picoUartCompile.log -jou picoUartCompile.jou"
 
 
 ##### Project Led Ctrl
