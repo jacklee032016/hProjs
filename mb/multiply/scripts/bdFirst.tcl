@@ -30,6 +30,13 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
    return 1
 }
 
+
+# CHANGE DESIGN NAME HERE
+variable design_name
+set design_name designFirst
+
+source -notrace $thisDir/params.tcl
+
 ################################################################
 # START
 ################################################################
@@ -43,14 +50,11 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
-   create_project project_1 myproj -part xc7a200tsbg484-1
-   set_property BOARD_PART digilentinc.com:nexys_video:part0:1.1 [current_project]
+   create_project project_1 myproj -part $PART
+   set_property BOARD_PART $BOARD [current_project]
 }
 
 
-# CHANGE DESIGN NAME HERE
-variable design_name
-set design_name designFirst
 
 # If you do not already have an existing IP Integrator design open,
 # you can create a design using the following command:

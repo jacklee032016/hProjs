@@ -3,9 +3,7 @@
 # 11.07, 2018
 
 
-set SYS "designFirst_wrapper"
-# set SYS "xyv"
-# set SYS mb767
+set SYS "sdk/xyvMulti"
 
 
 set HW_DEF		$SYS.hdf
