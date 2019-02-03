@@ -35,10 +35,12 @@ Structure of Directory
 Support Projects 
 =============================
 #. oled: 
+
    * reset button to make LED0 bright;
    * Central button to make OLED birght/dark;
    * Up/Bottom buttons to make string display/disappear in OLED;
 #. keyboard:
+
    * USB keyboard insert into USB port;
    * key code output in debug serial port (9600 bps);
    
