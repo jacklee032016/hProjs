@@ -9,7 +9,7 @@ if {[info exists ::create_path]} {
 puts "INFO: Creating new project in $dest_dir"
 
 # Set the reference directory for source file relative paths (by default the value is script directory path)
-set proj_name "Keyboard"
+set proj_name "OledDemo"
 
 # Set the reference directory for source file relative paths (by default the value is script directory path)
 set origin_dir ".."
@@ -34,7 +34,7 @@ set obj [get_projects $proj_name]
 set_property "default_lib" "xil_defaultlib" $obj
 set_property "part" "$part_num" $obj
 set_property "simulator_language" "Mixed" $obj
-set_property "target_language" "VHDL" $obj
+set_property "target_language" "Verilog" $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -47,20 +47,21 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 }
 
 # Set IP repository paths
-set obj [get_filesets sources_1]
-set_property "ip_repo_paths" "[file normalize $repo_dir]" $obj
+#set obj [get_filesets sources_1]
+#set_property "ip_repo_paths" "[file normalize $repo_dir]" $obj
 
 # Add conventional sources
 add_files -quiet $src_dir/hdl
 
 # Add IPs
-add_files -quiet [glob -nocomplain ../src/ip/*/*.xci]
+#add_files -quiet [glob -nocomplain ../src/ip/*/*.xci]
+#add_files -quiet [glob -nocomplain ../src/ip/*/*.xco]
 
 # Add constraints
 add_files -fileset constrs_1 -quiet $src_dir/constraints
 
 # Refresh IP Repositories
-update_ip_catalog
+#update_ip_catalog
 
 # Create 'synth_1' run (if not found)
 if {[string equal [get_runs -quiet synth_1] ""]} {
@@ -91,6 +92,7 @@ if {[string equal [get_runs -quiet impl_1] ""]} {
 set obj [get_runs impl_1]
 set_property "part" "$part_num" $obj
 set_property "steps.write_bitstream.args.bin_file" "1" $obj
+
 
 # set the current impl run
 current_run -implementation [get_runs impl_1]

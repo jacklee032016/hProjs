@@ -40,3 +40,4 @@ set_property -dict { PACKAGE_PIN V22   IOSTANDARD LVCMOS33 } [get_ports { oled_v
 #set_property -dict { PACKAGE_PIN AA20  IOSTANDARD LVCMOS33 } [get_ports { oled_vbat }]; #IO_L8P_T1_D11_14 Sch=ja[9]
 #set_property -dict { PACKAGE_PIN AA18  IOSTANDARD LVCMOS33 } [get_ports { oled_vdd  }]; #IO_L17P_T2_A14_D30_14 Sch=ja[10]
 
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
