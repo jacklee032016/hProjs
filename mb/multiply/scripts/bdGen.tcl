@@ -3,6 +3,12 @@ set thisDir [file dirname [info script]]
 # source common utilities
 source -notrace $thisDir/utils.tcl
 
+source -notrace $thisDir/params.tcl
+# set PROJ 		"xyv"
+# set PART		"xc7a200tsbg484-1"
+# set BOARD		"digilentinc.com:nexys_video:part0:1.1"
+# set BD_NAME		"designFirst"
+
 # passed into this script w/ -tclargs option to specify
 # whether to reuse golden sources or rebuild all from scratch
 # set this variable to 1 to reuse the latest "golden"
@@ -22,10 +28,6 @@ set repoRoot ./
 set localRoot ./
 
 
-set PROJ 	"xyv"
-set PART	"xc7a200tsbg484-1"
-set BOARD	"digilentinc.com:nexys_video:part0:1.1"
-set BD_NAME		"designFirst"
 
 # Create project
 create_project -force $PROJ $localRoot/works -part $PART
@@ -54,6 +56,7 @@ puts "INFO: Project created:$PROJ"
 # first get the major.minor version of the tool - and source
 # the bd creation script that corresponds to the current tool version
 set currVer [join [lrange [split [version -short] "."] 0 1] "."]
+
 puts "Current Version $currVer"
 
 source $thisDir/bdFirst.tcl
@@ -62,13 +65,13 @@ validate_bd_design
 save_bd_design
 
 # Generate Target
-# set_property synth_checkpoint_mode Singular [get_files */${BD_NAME}.bd]
+# set_property synth_checkpoint_mode Singular [get_files */${design_name}.bd]
 
 #create_fileset -blockset -define_from zynq_bd zynq_bd
-# generate_target all [get_files */${BD_NAME}.bd]
-# create_ip_run [get_files */${BD_NAME}.bd]
-# launch_runs ${BD_NAME}_synth_1
-# wait_on_run ${BD_NAME}_synth_1 
+# generate_target all [get_files */${design_name}.bd]
+# create_ip_run [get_files */${design_name}.bd]
+# launch_runs ${design_name}_synth_1
+# wait_on_run ${design_name}_synth_1 
 
  # Generate the wrapper
 set design_name [get_bd_designs]

@@ -3,9 +3,10 @@ set thisDir [file dirname [info script]]
 # source common utilities
 source -notrace $thisDir/utils.tcl
 
+source -notrace $thisDir/params.tcl
+
 set localRoot ./
 
-set PROJ 	"xyv"
 
 # Create project
 open_project $localRoot/works/$PROJ.xpr
@@ -28,6 +29,7 @@ write_bitstream $PROJ.bit
 write_hwdef -file $PROJ.hwdef
 # *.sysdef include bitstream and hardware definition
 write_sysdef -bitfile $PROJ.bit -hwdef $PROJ.hwdef -file $PROJ.sysdef
+file copy -force $PROJ.sysdef $PROJ.hdf
 
 # If successful, "touch" a file so the make utility will know it's done 
 touch {.compile.done}
