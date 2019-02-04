@@ -31,10 +31,11 @@ firstSw: .firstSw.done
 .firstSw.done : 
 	xsdk -batch -source ./scripts/swGen.tcl 
 
-firstRun: 
-	xsdk -batch -source ./scripts/swRun.tcl 
+upload: 
+	vivado -mode batch -source ./scripts/program.tcl -tempDir works -log program.log -jou program.jou
 
 #
+#	xsdk -batch -source ./scripts/swRun.tcl 
 
 # delete everything except this Makefile
 clean :	
